@@ -6,43 +6,53 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private HBox hBox;
     private VBox vBox;
-    private Button btn1, btn2, btn3;
+    private MenuBar mnbPrincipal;
+    private Menu menCompetencia1, menCompetencia2, menCerrar;
+    private MenuItem mitCalcu,mitSalir;
+    private Scene escena;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         
-        CrearUI();
+        CrearMenu();
 
         primaryStage.setTitle("Proyecto de Clase TAP 2021");
-        primaryStage.setScene(new Scene(vBox, 300, 70));
+        primaryStage.setScene(escena);
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
-    private void CrearUI() {
-
-        btn1 = new Button("Botón 1");
-        btn2 = new Button("Botón 2");
-        btn3 = new Button("Botón 3");
-
-        hBox = new HBox();
+    private void CrearMenu() {
         vBox = new VBox();
 
-        hBox.getChildren().addAll(btn1,btn2,btn3);
-        hBox.setSpacing(10);
-        hBox.setPadding(new Insets(20,20,20,20));
+        mnbPrincipal    = new MenuBar();
+        menCompetencia1 = new Menu("Competencia 1");
+        menCompetencia2 = new Menu("Compentencia 2");
+        menCerrar       = new Menu("Cerrar");
+        mnbPrincipal.getMenus().addAll(menCompetencia1,menCompetencia2,menCerrar);
 
-        vBox.getChildren().addAll(btn1,btn2,btn3);
-        vBox.setSpacing(10);
-        vBox.setPadding(new Insets(20));
+        mitCalcu = new MenuItem("Calculadora");
+        menCompetencia1.getItems().add(mitCalcu);
+
+        mitSalir  = new MenuItem("Salir");
+        mitSalir.setOnAction(event -> { System.exit(0);});
+        menCerrar.getItems().add(mitSalir);
+
+        vBox.getChildren().add(mnbPrincipal);
+
+        escena = new Scene(vBox, 300, 70);
+
     }
 
 
