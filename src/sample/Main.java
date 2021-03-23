@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sample.views.Calculadora;
+import sample.views.Encriptador;
 import sample.views.Rompecabezas;
 
 public class Main extends Application {
@@ -20,7 +21,7 @@ public class Main extends Application {
     private VBox vBox;
     private MenuBar mnbPrincipal;
     private Menu menCompetencia1, menCompetencia2, menCerrar;
-    private MenuItem mitCalcu,mitRompeCabezas,mitSalir;
+    private MenuItem mitCalcu,mitRompeCabezas,mitEncriptar,mitSalir;
     private Scene escena;
 
     @Override
@@ -48,7 +49,9 @@ public class Main extends Application {
         mitCalcu.setOnAction(event -> opcionesMenu(1));
         mitRompeCabezas = new MenuItem("Rompecabezas");
         mitRompeCabezas.setOnAction(event -> opcionesMenu(2));
-        menCompetencia1.getItems().addAll(mitCalcu,mitRompeCabezas);
+        mitEncriptar = new MenuItem("Encriptador");
+        mitEncriptar.setOnAction(event -> opcionesMenu(3));
+        menCompetencia1.getItems().addAll(mitCalcu,mitRompeCabezas,mitEncriptar);
 
         mitSalir  = new MenuItem("Salir");
         mitSalir.setOnAction(event -> { System.exit(0);});
@@ -62,7 +65,8 @@ public class Main extends Application {
     private void opcionesMenu(int opc) {
         switch(opc){
             case 1: new Calculadora(); break;
-            case 2: new Rompecabezas();
+            case 2: new Rompecabezas(); break;
+            case 3: new Encriptador();
         }
     }
 
