@@ -9,6 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import sample.components.CellCustome;
 import sample.models.CancionesDAO;
 
 public class FrmCanciones extends Stage {
@@ -30,6 +31,9 @@ public class FrmCanciones extends Stage {
         vBox = new VBox();
         tbvCanciones = new TableView<>();
         btnAgregar = new Button("Agregar");
+        btnAgregar.setOnAction(event -> {
+            new frmCancion(tbvCanciones, null);
+        });
         vBox.getChildren().addAll(tbvCanciones,btnAgregar);
         CrearTabla();
         escena = new Scene(vBox,500,250);
@@ -59,14 +63,23 @@ public class FrmCanciones extends Stage {
                 new Callback<TableColumn<CancionesDAO, String>, TableCell<CancionesDAO, String>>() {
                     @Override
                     public TableCell<CancionesDAO, String> call(TableColumn<CancionesDAO, String> param) {
-                        return null;
+                        return new CellCustome(1);
                     }
                 }
         );
 
-        tbvCanciones.getColumns().addAll(tbcIdCancion,tbcNomCancion,tbcDuracion,tbcPortada,tbcAnio,tbcLetra,tbcEditar);
+        TableColumn<CancionesDAO, String> tbcBorrar = new TableColumn<>("Borrar");
+        tbcBorrar.setCellFactory(
+                new Callback<TableColumn<CancionesDAO, String>, TableCell<CancionesDAO, String>>() {
+                    @Override
+                    public TableCell<CancionesDAO, String> call(TableColumn<CancionesDAO, String> param) {
+                        return new CellCustome(2);
+                    }
+                }
+        );
+
+
+        tbvCanciones.getColumns().addAll(tbcIdCancion,tbcNomCancion,tbcDuracion,tbcPortada,tbcAnio,tbcLetra,tbcEditar,tbcBorrar);
         tbvCanciones.setItems(objCDAO.SELECT());
     }
-
-
 }
