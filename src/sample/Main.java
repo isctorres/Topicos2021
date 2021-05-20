@@ -11,18 +11,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import sample.components.Corredor;
 import sample.models.Conexion;
-import sample.views.Calculadora;
-import sample.views.Encriptador;
-import sample.views.FrmCanciones;
-import sample.views.Rompecabezas;
+import sample.views.*;
 
 public class Main extends Application implements EventHandler<WindowEvent> {
 
     private VBox vBox;
     private MenuBar mnbPrincipal;
     private Menu menCompetencia1, menCompetencia2, menCerrar;
-    private MenuItem mitCalcu,mitRompeCabezas,mitEncriptar,mitBDCanciones,mitSalir;
+    private MenuItem mitCalcu,mitRompeCabezas,mitEncriptar,mitBDCanciones,mitCorredores,mitSalir;
     private Scene escena;
 
     @Override
@@ -39,6 +37,12 @@ public class Main extends Application implements EventHandler<WindowEvent> {
 
         // Abrimos la conexion de manera GLOBAL
         Conexion.getConexion();
+
+        /*new Corredor("Homero").start();
+        new Corredor("Flash").start();
+        new Corredor("Quick Silver").start();
+        new Corredor("Bob Esponja").start();
+        new Corredor("Shrek").start();*/
     }
 
     private void CrearMenu() {
@@ -60,6 +64,10 @@ public class Main extends Application implements EventHandler<WindowEvent> {
         mitBDCanciones.setOnAction(event -> opcionesMenu(4));
         menCompetencia1.getItems().addAll(mitCalcu,mitRompeCabezas,mitEncriptar, mitBDCanciones);
 
+        mitCorredores = new MenuItem("Ejecución de Hilos");
+        mitCorredores.setOnAction(event -> opcionesMenu(5));
+        menCompetencia2.getItems().addAll(mitCorredores);
+
         mitSalir  = new MenuItem("Salir");
         mitSalir.setOnAction(event -> { System.exit(0);});
         menCerrar.getItems().add(mitSalir);
@@ -75,7 +83,8 @@ public class Main extends Application implements EventHandler<WindowEvent> {
             case 1: new Calculadora(); break;
             case 2: new Rompecabezas(); break;
             case 3: new Encriptador(); break;
-            case 4: new FrmCanciones();
+            case 4: new FrmCanciones(); break;
+            case 5: new Pista();
         }
     }
 
